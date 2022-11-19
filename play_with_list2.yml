@@ -1,0 +1,23 @@
+---
+- name: Play with list
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Add ansible student name
+      set_fact:
+        ansible_student_list: "{{ ansible_student_list | default([]) + [item] }}"
+      loop:
+       - "Praveen"
+       - "Neeraj"
+       - "Devendra"
+       - "Gyan"
+       - "Ramesh"
+       - "Dhruv"
+      when: item != 'Praveen'
+
+    - name: Print ansible student name
+      debug:
+        var: ansible_student_list
+
+
+

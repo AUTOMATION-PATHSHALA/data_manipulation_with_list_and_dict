@@ -1,0 +1,59 @@
+---
+- name: Play with dict
+  hosts: localhost
+  gather_facts: false
+  vars:
+    student_records: [{
+      "first": "Praveen",
+      "last": "Kumar",
+      "mobile": "9958185454",
+      "ctc": 100000,
+      "address": {
+        "city": "New Delhi",
+        "country": "India"
+      }
+    },
+    {
+      "first": "Gyan",
+      "last": "Jha",
+      "mobile": "9958123456",
+      "ctc": 150000,
+      "address": {
+        "city": "Noida",
+        "country": "India"
+      }
+    },
+    {
+      "first": "Neeraj",
+      "last": "Dixit",
+      "mobile": "995818876",
+      "ctc": 150000,
+      "address": {
+        "city": "Noida",
+        "country": "India"
+      }
+    }]
+
+  tasks:
+    - name: Select and Extract only cities
+      debug:
+        msg: "{{ student_records | map(attribute='address') | map(attribute='city') | list }}"
+
+    - name: Select and Extract only cities & country
+      debug:
+        msg: "{{ student_records | map(attribute='address') | list }}"
+
+    - name: attribute joined with comma in single line
+      debug:
+        msg: "{{ student_records[item|int]['first'] + ',' + student_records[item|int]['last'] }}"
+      loop: "{{ range((student_records|length)) | list }}"
+
+    - name: attribute joined with comma in single line
+      set_fact:
+        firstlast: "{{ firstlast | default([]) + [student_records[item|int]['first'] + ',' + student_records[item|int]['last']] }}"
+      loop: "{{ range((student_records|length)) | list }}"
+
+    - debug: var=firstlast
+
+
+
