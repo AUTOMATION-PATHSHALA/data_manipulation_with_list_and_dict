@@ -1,0 +1,68 @@
+---
+- name: Play with dict
+  hosts: localhost
+  gather_facts: false
+  vars:
+    numbers: [3,5,7,8,9]
+  tasks:
+    - name: remove value from list using jinja
+      debug:
+        msg: |
+          {% set _dmmy = numbers.pop(1) %}{{_dmmy}}:-{{numbers}}
+
+    - name: remove value from list using jinja type 2
+      debug:
+        msg: |
+          {% if numbers.pop(1) %}{% endif %}{{numbers}}
+
+    - name: get updated list
+      set_fact:
+        updated_list:
+          '{% set _dummy = numbers.pop(1) %}{{numbers}}'
+
+    - debug: var=updated_list
+
+    - name: remove value from list using jinja using value
+      debug:
+        msg: |
+          {% if numbers.remove(7) %}{% endif %}{{numbers}}
+
+    - name: print value using loop  with jinja
+      debug:
+        msg: |
+          {% for i in numbers %}
+          {{i}}
+          {% endfor %}
+
+    # - name: print value using loop  with jinja
+    #   template:
+    #     src: test_numbers.j2
+    #     dest: get_loop_output.txt
+
+    - name: Number sorting in list using jinja
+      debug:
+        msg: |
+          {% set _dummy = numbers.sort() %}{{numbers}}
+
+    - name: Number sorting in list using jinja
+      debug:
+        msg: |
+          {% set new_numbers = [] %}
+          {% for i in numbers %}
+          {% set _ = new_numbers.append(i|pow(3)|int) %}
+          {% endfor %}
+          {{ new_numbers }}
+
+    - name: Number sorting in list using jinja
+      debug:
+        msg: |
+          {% set new_numbers = [] %}
+          {% for i in numbers %}
+          {% set _ = new_numbers.append(i|root) %}
+          {% endfor %}
+          {{ new_numbers }}
+
+
+
+    
+

@@ -114,6 +114,18 @@
         msg: "{{ student_records | map(attribute='age') | list | min }}"
 
 
+    - name: sort number list
+      debug:
+        msg: "{{ numbers | sort() }}"
+
+    # - name: Add new list
+    #   set_fact:
+    #     new_student_rec: "{{ student_names | combine(['Ramesh'])}}"
+
+
+    # - debug: var=new_student_rec
+
+
 
 
     

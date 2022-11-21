@@ -33,6 +33,14 @@
         "country": "India"
       }
     }]
+    a: [{ "first": "Dhruv", "last": "Gupta", "mobile": "995816161", "ctc": 100000,  "address": {"city": "Noida", "country": "India" }}]
+    employees:
+      {
+        "praveen": {"mobile": "9958185454", "email": "praveen@gmail.com", "city": "New Delhi"},
+        "ramesh": {"mobile": "9958186464", "email": "ramesh@gmail.com", "city": "New Delhi"},
+        "devendra": {"mobile": "9958187575", "email": "devendra@gmail.com", "city": "Delhi"},
+        "dhruv": {"mobile": "9958186161", "email": "dhruv@gmail.com", "city": "Noida"}
+      }
 
   tasks:
     - name: Select and Extract only cities
@@ -55,5 +63,23 @@
 
     - debug: var=firstlast
 
+    - name: Select only praveen's records
+      debug:
+        msg: "{{ ['praveen'] | map('extract', employees) | list }}"
 
 
+    - name: Remove praveen's records
+      debug:
+        msg: "{{ student_records[item|int] | combine({'address': omit }) }}"
+      loop: "{{ range(student_records|length) |list }}"
+
+
+    - name: Add Dhruv's records
+      set_fact:
+        student_records: '{{ student_records | default({}) | combine(a) }}'
+      # loop:
+      #   - "{{ student_names }}"
+      #   - "{{ a }}"
+
+    - debug: var=student_records
+      
