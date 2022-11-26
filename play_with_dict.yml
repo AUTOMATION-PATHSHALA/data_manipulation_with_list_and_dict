@@ -33,7 +33,7 @@
         "country": "India"
       }
     }]
-    a: [{ "first": "Dhruv", "last": "Gupta", "mobile": "995816161", "ctc": 100000,  "address": {"city": "Noida", "country": "India" }}]
+    a: { "first": "Dhruv", "last": "Gupta", "mobile": "995816161", "ctc": 100000,  "address": {"city": "Noida", "country": "India" }}
     employees:
       {
         "praveen": {"mobile": "9958185454", "email": "praveen@gmail.com", "city": "New Delhi"},
@@ -80,6 +80,19 @@
       # loop:
       #   - "{{ student_names }}"
       #   - "{{ a }}"
+
+    # - debug: var=student_records
+
+    # - name: Add dict
+    #   debug:
+    #     msg: |
+    #       {% set _dummy = student_records.append(a) %}{{student_records}}
+
+    - name: add new dict and set in variable
+      set_fact:
+        student_records: |
+          {% set _dummy = student_records.append(a) %}
+          {{student_records}}
 
     - debug: var=student_records
       
