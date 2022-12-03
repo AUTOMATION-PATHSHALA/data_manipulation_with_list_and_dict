@@ -1,0 +1,25 @@
+---
+- name: Play with lineinfile
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+    # - name: insert/update "Match User" configuration block in blockinfile-testing.txt
+    #   blockinfile:
+    #     path: blockinfile-testing.txt
+    #     block: |
+    #       I love Ansible
+    #       I love Ansible
+    #       I love Ansible
+    #     # create: yes
+    #     # state: present
+
+    - name: insert/update "Match User" configuration block in blockinfile-testing.txt
+      blockinfile:
+        path: blockinfile-testing.txt
+        content: |
+          Ramesh
+          Neeraj
+          dhruv
+        insertbefore: "^ramesh"
+        state: present

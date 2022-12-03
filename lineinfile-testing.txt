@@ -1,0 +1,2 @@
+Class addended by Neeraj and Dhruv
+SELINUX=enforcing

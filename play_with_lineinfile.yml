@@ -1,0 +1,76 @@
+---
+- name: Play with lineinfile
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: This is first line added by lineinfile module
+    #     create: yes
+    #     state: present
+
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: I love Ansible
+    #     state: present
+
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: Class addended by Neeraj and Dhruv
+    #     insertbefore: "^I love"
+    #     state: present
+
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: This is first class of lineinfile module
+    #     insertbefore: "^I love"
+    #     state: present
+
+    # Line added before "I love Ansible" using regex and firstmatch
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: This is first class of lineinfile module
+    #     insertbefore: "^I love"
+    #     firstmatch: yes
+    #     state: present
+
+    # - name: Create New File
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: This statement added by praveen with insertafter parameter
+    #     insertafter: "^I love"
+    #     # firstmatch: yes
+    #     state: present
+
+    # - name: Replace statment
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: 'SELINUX=enforcing'
+    #     regex: '^SELINUX='
+    #     state: present
+
+    # - name: Delete statment no regex
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     line: 'I love Ansible'
+    #     # regex: 'I Love'
+    #     state: absent
+
+    # - name: Delete statment with regex
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     regex: '^This statement'
+    #     state: absent
+
+    # - name: Delete statment with regex
+    #   lineinfile:
+    #     path: lineinfile-testing.txt
+    #     regex: '^This is'
+    #     firstmatch: yes
+    #     state: absent
